@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consee • Journal</title>
+
+  <!-- REQUIRED: shared styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body class="journal">
+
+<header>
+  <nav>
+    <a class="brand" href="./index.html">Consee</a>
+    <a href="./index.html">Home</a>
+    <a href="./explore.html">Explore</a>
+    <a href="./journal.html">Journal</a>
+    <a href="./about.html">About</a>
+    <a href="./help.html">Help</a>
+    <a href="./login.html">Login</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ADD ENTRY -->
+  <section class="card">
+    <div class="journal-header">
+      <h1>My Concert Diary</h1>
+    </div>
+
+    <form id="journalForm" class="journal-form">
+      <div class="row">
+        <input id="concert" placeholder="Concert / Tour" required />
+        <input id="artist" placeholder="Artist" required />
+        <input id="date" type="date" required />
+      </div>
+
+      <select id="rating">
+        <option value="">Rating</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <textarea id="notes" placeholder="Your thoughts..."></textarea>
+
+      <label class="upload">
+        Upload photo or video
+        <input type="file" id="media" accept="image/*,video/*" />
+      </label>
+
+      <button type="submit">Add Entry</button>
+    </form>
+  </section>
+
+  <!-- DIARY LIST -->
+  <section class="card">
+    <div id="diary" class="diary"></div>
+  </section>
+
+</main>
+
+<!-- REQUIRED: journal script -->
+<script src="./js/journal.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explore</title>
+
+  <link rel="stylesheet" href="./css/styles.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    defer
+  ></script>
+
+  <script src="./js/explore.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a class="brand" href="./index.html">Consee</a>
+      <a href="./index.html">Home</a>
+      <a href="./explore.html">Explore</a>
+      <a href="./journal.html">Journal</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- FEATURED ARTISTS -->
+    <section class="card">
+      <h2>Featured Artists</h2>
+      <div class="swiper" id="featuredSwiper">
+        <div class="swiper-wrapper" id="featuredSlides"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="card" style="margin-top:16px;">
+      <h1>Explore Concerts</h1>
+
+      <div class="row">
+        <input id="artistInput" placeholder="Artist" />
+        <input id="cityInput" placeholder="City (optional)" />
+        <input id="dateInput" type="date" />
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <p id="status" class="small"></p>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="card" style="margin-top:16px;">
+      <div id="results" class="reviewGrid"></div>
+    </section>
+  </main>
+</body>
+</html>

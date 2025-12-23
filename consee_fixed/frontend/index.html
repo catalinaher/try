@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consee | Home</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body class="home">
+  <header>
+    <nav>
+      <a class="brand" href="./index.html">Consee</a>
+      <a href="./index.html">Home</a>
+      <a href="./explore.html">Explore</a>
+      <a href="./journal.html">Journal</a>
+      <a href="./about.html">About</a>
+      <a href="./help.html">Help</a>
+
+      <!-- auth nav -->
+      <a id="navLogin" href="./login.html">Login</a>
+      <a id="navProfile" href="./profile.html" style="display:none;">Profile</a>
+      <a id="navLogout" href="#" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <main class="grid" style="gap: 18px;">
+    <section class="card">
+      <h1>Consee</h1>
+      <p>A place to discover concerts and share real experiences—like Letterboxd, but for live music.</p>
+      <div id="helloUser" class="small" style="margin-top:8px;"></div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin:0 0 10px;">Featured Concerts</h2>
+
+      <div class="swiper" id="featuredSwiper">
+        <div class="swiper-wrapper" id="featuredSlides"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+      <div class="small" style="margin-top:10px;">
+        This slider is powered by Swiper.js.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin:0 0 10px;">Popular Near You</h2>
+      <form id="nearbyForm" class="journal-controls" style="margin-top:12px;">
+        <input id="nearbyCity" placeholder="City (optional)" />
+        <input id="nearbyZip" placeholder="Zip (optional)" />
+        <button type="submit">Load Nearby</button>
+      </form>
+      <div class="small" style="margin-top:10px;">Uses Ticketmaster if you set <code>TICKETMASTER_API_KEY</code> in Vercel.</div>
+      <div id="nearbyEvents" class="list"></div>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="card">
+        <h2 style="margin:0 0 10px;">Search Concerts</h2>
+        <form id="searchForm" class="grid" style="gap: 12px;">
+          <div>
+            <label>Artist</label>
+            <input id="artist" placeholder="e.g., Coldplay" />
+          </div>
+          <div>
+            <label>Location (City)</label>
+            <input id="location" placeholder="e.g., Chicago" />
+          </div>
+          <button type="submit">Search</button>
+          <div class="small">This will use your backend API → external concert API → results.</div>
+        </form>
+        <div id="events" class="list"></div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 10px;">Recent Reviews</h2>
+        <div class="small">Loaded from Supabase through your backend API.</div>
+        <div id="reviews" class="list"></div>
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08);margin:14px 0;">
+        <h3 style="margin:0 0 10px;">Ratings Overview</h3>
+        <canvas id="ratingsChart" height="120"></canvas>
+        <div class="small">This chart is generated using Chart.js.</div>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/auth.js"></script>
+
+  <!-- existing libs -->
+  <script src="./js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/home.js"></script>
+
+  <script>
+   
+    (async () => {
+      const el = document.getElementById("helloUser");
+      if (!el || !window.sb) return;
+      const { data } = await window.sb.auth.getSession();
+      if (!data.session?.user) {
+        el.innerHTML = `Not signed in. <a href="./login.html">Login</a>`;
+        return;
+      }
+      const name = await window.getCurrentUsername();
+      el.textContent = `Signed in as ${name}`;
+    })();
+  </script>
+</body>
+</html>
